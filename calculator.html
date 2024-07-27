@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /*inside body div has id main , id symbolizes with #*/
+        #main{
+            width: 300px;
+            margin: 50px auto;
+            padding: 10px;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 50px;
+            background-color: silver;
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        input[type="button"] {
+            width: 22%;
+            height: 40px;
+            font-size: 20px;
+            margin: 2px;
+            border-radius: 5px;
+            border: none;
+        }
+
+
+        /*
+        height and width of the buttons, margin between the buttons, and the numbers on the buttons
+        input{
+            width: 20%;
+            height: 40px;
+            font-size: 20px;
+            margin: 6px;
+        }
+         Color and size of the textbox
+        #calc{
+            width: 96%;
+            height: 50px;
+            background-color: silver;
+        }
+        */
+
+    </style>
+</head>
+<body>
+    <div id = "main">
+        <form name = "calcForm">
+            <input type = "text" name = "calcTextbox" id="calc" placeholder="0"> <br/>
+            <input type = "button" value = "1" onclick = "calcForm.calcTextbox.value+=1">
+            <input type = "button" value = "2" onclick = "calcForm.calcTextbox.value+=2">
+            <input type = "button" value = "3" onclick = "calcForm.calcTextbox.value+=3">
+            <input type = "button" value = "+" onclick = "add()">
+            <br/>
+            <input type = "button" value = "4" onclick = "calcForm.calcTextbox.value+=4">
+            <input type = "button" value = "5" onclick = "calcForm.calcTextbox.value+=5">
+            <input type = "button" value = "6" onclick = "calcForm.calcTextbox.value+=6">
+            <input type = "button" value = "-" onclick = "sub()">
+            <br/>
+            <input type = "button" value = "7" onclick = "calcForm.calcTextbox.value+=7">
+            <input type = "button" value = "8" onclick = "calcForm.calcTextbox.value+=8">
+            <input type = "button" value = "9" onclick = "calcForm.calcTextbox.value+=9">
+            <input type = "button" value = "/" onclick = "div()">
+            <br>
+            <input type = "button" value = "c" onclick = "calcForm.calcTextbox.value = ''"> <!--clear-->
+            <input type = "button" value = "0" onclick = "calcForm.calcTextbox.value+= 0">
+            <input type = "button" value = "=" onclick = "calcForm.calcTextbox.value = eval(calcForm.calcTextbox.value)">
+            <input type = "button" value = "x" onclick = "mul()">
+        </form>
+    </div>
+
+    <script>
+        function add(){
+            var var1 = 0, var2 =0; //var1 is textbox value that will be entered in the texbox and var2 is last character or number in the textbox
+            var1 = calcForm.calcTextbox.value;
+            b = var1.charAt(var1.length-1);  //last number
+            if(b == '+' || b == '-' || b == '*' || b == '/'){
+                //Example: if there is 23- in the texbox and I want to remove only - , not everything, and enter + (enter23- then click +, - will automatically be removed)
+                //Also after the number if user enters a symbol more than one like 123++++, calculator won't allow that
+                calcForm.calcTextbox.value = var1.substring(0, var1.length-1);  //gets from first character to penultimate character 
+                calcForm.calcTextbox.value += '+';
+            }else{
+                calcForm.calcTextbox.value += '+';
+            }
+        }
+            function sub(){
+            var var1 = 0, var2 =0; //var1 is textbox value that will be entered in the texbox and var2 is last character or number in the textbox
+            var1 = calcForm.calcTextbox.value;
+            b = var1.charAt(var1.length-1);  //last number
+            if(b == '+' || b == '-' || b == '*' || b == '/'){
+                //Example: if there is 23- in the texbox and I want to remove only - , not everything, and enter + (enter23- then click +, - will automatically be removed)
+                calcForm.calcTextbox.value = var1.substring(0, var1.length-1);  //gets from first character to penultimate character 
+                calcForm.calcTextbox.value += '-';
+            }else{
+                calcForm.calcTextbox.value += '-';
+            }
+        }
+        function div(){
+            var var1 = 0, var2 =0; //var1 is textbox value that will be entered in the texbox and var2 is last character or number in the textbox
+            var1 = calcForm.calcTextbox.value;
+            b = var1.charAt(var1.length-1);  //last number
+            if(b == '+' || b == '-' || b == '*' || b == '/'){
+                //Example: if there is 23- in the texbox and I want to remove only - , not everything, and enter + (enter23- then click +, - will automatically be removed)
+                calcForm.calcTextbox.value = var1.substring(0, var1.length-1);  //gets from first character to penultimate character 
+                calcForm.calcTextbox.value += '/';
+            }else{
+                calcForm.calcTextbox.value += '/';
+            }
+        }
+        function mul(){
+            var var1 = 0, var2 =0; //var1 is textbox value that will be entered in the texbox and var2 is last character or number in the textbox
+            var1 = calcForm.calcTextbox.value;
+            b = var1.charAt(var1.length-1);  //last number
+            if(b == '+' || b == '-' || b == '*' || b == '/'){
+                //Example: if there is 23- in the texbox and I want to remove only - , not everything, and enter + (enter23- then click +, - will automatically be removed)
+                calcForm.calcTextbox.value = var1.substring(0, var1.length-1);  //gets from first character to penultimate character 
+                calcForm.calcTextbox.value += '*';
+            }else{
+                calcForm.calcTextbox.value += '*';
+            }
+        }
+
+
+        /* II.WAY
+           <div id="main">
+        <form name="calcForm">
+            <input type="text" name="calcTextbox" id="calc" placeholder="0" readonly>
+            <br/>
+            <input type="button" value="1" onclick="appendValue(1)">
+            <input type="button" value="2" onclick="appendValue(2)">
+            <input type="button" value="3" onclick="appendValue(3)">
+            <input type="button" value="+" onclick="appendOperator('+')">
+            <br/>
+            <input type="button" value="4" onclick="appendValue(4)">
+            <input type="button" value="5" onclick="appendValue(5)">
+            <input type="button" value="6" onclick="appendValue(6)">
+            <input type="button" value="-" onclick="appendOperator('-')">
+            <br/>
+            <input type="button" value="7" onclick="appendValue(7)">
+            <input type="button" value="8" onclick="appendValue(8)">
+            <input type="button" value="9" onclick="appendValue(9)">
+            <input type="button" value="/" onclick="appendOperator('/')">
+            <br/>
+            <input type="button" value="C" onclick="clearCalc()">
+            <input type="button" value="0" onclick="appendValue(0)">
+            <input type="button" value="=" onclick="calculate()">
+            <input type="button" value="*" onclick="appendOperator('*')">
+        </form>
+    </div>
+    <script>
+        function appendValue(value) {
+            calcForm.calcTextbox.value += value;
+        }
+
+        function appendOperator(operator) {
+            var value = calcForm.calcTextbox.value;
+            var lastChar = value.charAt(value.length - 1);
+            if (['+', '-', '*', '/'].includes(lastChar)) {
+                calcForm.calcTextbox.value = value.slice(0, -1) + operator;
+            } else {
+                calcForm.calcTextbox.value += operator;
+            }
+        }
+
+        function clearCalc() {
+            calcForm.calcTextbox.value = '';
+        }
+
+        function calculate() {
+            try {
+                calcForm.calcTextbox.value = eval(calcForm.calcTextbox.value);
+            } catch (e) {
+                calcForm.calcTextbox.value = 'Error';
+            }
+        }
+        */
+        
+    </script>
+</body>
+</html>
